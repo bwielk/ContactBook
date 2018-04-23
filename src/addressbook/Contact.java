@@ -10,10 +10,14 @@ public class Contact {
     private String displayedName;
 
     public Contact(String name, String surname, String email, String phoneNum, String skypeName, String displayedName)
-    throws Contact.WrongPhoneNumberFormatException{
+    throws Contact.WrongPhoneNumberFormatException, Contact.WrongEmailFormatException{
         this.name = name;
         this.surname = surname;
-        this.email = email;
+        if(!email.contains("@")) {
+            throw new Contact.WrongEmailFormatException("The email address must contain the @ character");
+        }else{
+            this.email = email;
+        }
         if((phoneNum.length()<9 || phoneNum.length()>10) || containsDigits(phoneNum)){
             throw new Contact.WrongPhoneNumberFormatException("The phone number must consist of 9 to 10 digits");
         }else{
@@ -47,7 +51,7 @@ public class Contact {
         return this.phoneNum;
     }
 
-    public boolean containsDigits(String string){
+    private boolean containsDigits(String string){
         boolean containsCharsOtherThanDigits = false;
         for(char c : string.toCharArray()){
             if(Character.isDigit(c)){
@@ -62,6 +66,13 @@ public class Contact {
     public class WrongPhoneNumberFormatException extends Exception{
 
         public WrongPhoneNumberFormatException(String s){
+            super(s);
+        }
+    }
+
+    public class WrongEmailFormatException extends Exception{
+
+        public WrongEmailFormatException(String s){
             super(s);
         }
     }

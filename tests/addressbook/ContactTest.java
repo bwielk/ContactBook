@@ -13,7 +13,7 @@ public class ContactTest {
     private Contact newContact;
 
     @Before
-    public void before() throws Contact.WrongPhoneNumberFormatException {
+    public void before() throws Contact.WrongPhoneNumberFormatException, Contact.WrongEmailFormatException {
         contact1 = new Contact("Eva","Messica","em@em.com", "9872341123","evessica","Eva");
         contact2 = new Contact("James", "Deen", "jd@jd.com", "987321121","jdeen", "James");
     }
@@ -44,12 +44,17 @@ public class ContactTest {
     }
 
     @Test(expected = Contact.WrongPhoneNumberFormatException.class)
-    public void exceptionIsThrownIfContactHasIncorrectNumberOfChars() throws Contact.WrongPhoneNumberFormatException {
+    public void exceptionIsThrownIfContactHasIncorrectNumberOfChars() throws Contact.WrongPhoneNumberFormatException, Contact.WrongEmailFormatException {
        newContact = new Contact("Bart", "Simpson", "bs@bs.com", "87211233", "bart", "bsimp");
     }
 
     @Test(expected = Contact.WrongPhoneNumberFormatException.class)
-    public void exceptionIsThrownIfThePhoneNumberContainsIncorrectCharacters() throws Contact.WrongPhoneNumberFormatException {
+    public void exceptionIsThrownIfThePhoneNumberContainsIncorrectCharacters() throws Contact.WrongPhoneNumberFormatException, Contact.WrongEmailFormatException {
         newContact = new Contact("Bart", "Simpson", "bs@bs.com", "872AAA233", "bart", "bsimp");
+    }
+
+    @Test(expected = Contact.WrongEmailFormatException.class)
+    public void exceptionIsThrownIfContactsEmailMissesTheATCharacter() throws Contact.WrongPhoneNumberFormatException, Contact.WrongEmailFormatException{
+        newContact = new Contact("Bart", "Simpson", "bsbs.com", "87211233", "bart", "bsimp");
     }
 }
