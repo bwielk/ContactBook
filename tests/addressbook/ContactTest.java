@@ -11,9 +11,9 @@ public class ContactTest {
     private Contact contact2;
 
     @Before
-    public void before(){
-        contact1 = new Contact("Eva","Messica","em@em.com","evessica","Eva");
-        contact2 = new Contact("James", "Deen", "jd@jd.com", "jdeen", "James");
+    public void before() throws Contact.WrongPhoneNumberFormatException {
+        contact1 = new Contact("Eva","Messica","em@em.com", "9872341123","evessica","Eva");
+        contact2 = new Contact("James", "Deen", "jd@jd.com", "987321121","jdeen", "James");
     }
 
     @Test
@@ -39,5 +39,10 @@ public class ContactTest {
         //contact has a displayed name
         assertEquals("Eva", contact1.getDisplayedName());
         assertEquals("James", contact2.getDisplayedName());
+    }
+
+    @Test(expected = Contact.WrongPhoneNumberFormatException.class)
+    public void exceptionIsThrownIfContactHasIncorrectNumberOfChars() throws Contact.WrongPhoneNumberFormatException {
+        Contact newContact = new Contact("Bart", "Simpson", "bs@bs.com", "87211233", "bart", "bsimp");
     }
 }
