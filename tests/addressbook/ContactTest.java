@@ -1,5 +1,6 @@
 package addressbook;
 
+import com.sun.org.apache.xml.internal.security.keys.ContentHandlerAlreadyRegisteredException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,6 +10,7 @@ public class ContactTest {
 
     private Contact contact1;
     private Contact contact2;
+    private Contact newContact;
 
     @Before
     public void before() throws Contact.WrongPhoneNumberFormatException {
@@ -43,6 +45,11 @@ public class ContactTest {
 
     @Test(expected = Contact.WrongPhoneNumberFormatException.class)
     public void exceptionIsThrownIfContactHasIncorrectNumberOfChars() throws Contact.WrongPhoneNumberFormatException {
-        Contact newContact = new Contact("Bart", "Simpson", "bs@bs.com", "87211233", "bart", "bsimp");
+       newContact = new Contact("Bart", "Simpson", "bs@bs.com", "87211233", "bart", "bsimp");
+    }
+
+    @Test(expected = Contact.WrongPhoneNumberFormatException.class)
+    public void exceptionIsThrownIfThePhoneNumberContainsIncorrectCharacters() throws Contact.WrongPhoneNumberFormatException {
+        newContact = new Contact("Bart", "Simpson", "bs@bs.com", "872AAA233", "bart", "bsimp");
     }
 }

@@ -14,7 +14,7 @@ public class Contact {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        if(phoneNum.length()<9 || phoneNum.length()>10){
+        if((phoneNum.length()<9 || phoneNum.length()>10) || containsDigits(phoneNum)){
             throw new Contact.WrongPhoneNumberFormatException("The phone number must consist of 9 to 10 digits");
         }else{
             this.phoneNum = phoneNum;
@@ -45,6 +45,18 @@ public class Contact {
 
     public String getPhoneNum(){
         return this.phoneNum;
+    }
+
+    public boolean containsDigits(String string){
+        boolean containsCharsOtherThanDigits = false;
+        for(char c : string.toCharArray()){
+            if(Character.isDigit(c)){
+                continue;
+            }else{
+                containsCharsOtherThanDigits = true;
+            }
+        }
+        return containsCharsOtherThanDigits;
     }
 
     public class WrongPhoneNumberFormatException extends Exception{
