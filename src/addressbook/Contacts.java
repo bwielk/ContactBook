@@ -6,7 +6,7 @@ import java.util.*;
 public class Contacts {
 
     private static LinkedHashMap<String, Contact> contacts = new LinkedHashMap<String, Contact>();
-    
+
     public static void main(String args[]) throws IOException{
 
         try(BufferedWriter contactsFile = new BufferedWriter(new FileWriter("contacts.txt"))){

@@ -16,7 +16,8 @@ public class Contact {
     throws Contact.WrongPhoneNumberFormatException, Contact.WrongEmailFormatException{
         this.name = name;
         this.surname = surname;
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+        String emailFormat = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
+        Pattern pattern = Pattern.compile(emailFormat);
         Matcher matcher = pattern.matcher(email);
         if (matcher.find()){
             this.email = email;
