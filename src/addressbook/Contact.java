@@ -1,5 +1,8 @@
 package addressbook;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Contact {
 
     private String name;
@@ -13,10 +16,12 @@ public class Contact {
     throws Contact.WrongPhoneNumberFormatException, Contact.WrongEmailFormatException{
         this.name = name;
         this.surname = surname;
-        if(!email.contains("@")) {
-            throw new Contact.WrongEmailFormatException("The email address must contain the @ character");
-        }else{
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+        Matcher matcher = pattern.matcher(email);
+        if (matcher.find()){
             this.email = email;
+        } else {
+            throw new WrongEmailFormatException("The email address must contain the @ character");
         }
         if((phoneNum.length()<9 || phoneNum.length()>10) || containsDigits(phoneNum)){
             throw new Contact.WrongPhoneNumberFormatException("The phone number must consist of 9 to 10 digits");

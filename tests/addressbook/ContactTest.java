@@ -41,6 +41,9 @@ public class ContactTest {
         //contact has a displayed name
         assertEquals("Eva", contact1.getDisplayedName());
         assertEquals("James", contact2.getDisplayedName());
+        //get phone number
+        assertEquals("9872341123", contact1.getPhoneNum());
+        assertEquals("987321121", contact2.getPhoneNum());
     }
 
     @Test(expected = Contact.WrongPhoneNumberFormatException.class)
