@@ -29,7 +29,8 @@ public class Contacts {
                         + contact.getSurname() + "\t"
                         + contact.getPhoneNum() + "\t"
                         + contact.getEmail() + "\t"
-                        + contact.getSkypeName() + "\n");
+                        + contact.getSkypeName() + "\t"
+                        + contact.getDisplayedName() + "\n");
             }
         }
     }
