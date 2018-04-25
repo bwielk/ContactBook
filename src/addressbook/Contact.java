@@ -68,6 +68,16 @@ public class Contact {
         return containsCharsOtherThanDigits;
     }
 
+    @Override
+    public String toString(){
+        return "name: " + getName() + "\t" +
+                "surname: " + getSurname() + "\t" +
+                "email: " + getEmail() + "\t" +
+                "phone number: " + getPhoneNum() + "\t" +
+                "skype: " + getSkypeName() + "\t" +
+                "displayed name: " + getDisplayedName();
+    }
+
     public class WrongPhoneNumberFormatException extends Exception{
 
         public WrongPhoneNumberFormatException(String s){
